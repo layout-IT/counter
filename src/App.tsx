@@ -6,8 +6,8 @@ function App() {
     let [state, setState] = useState(0)
 
 
-    const addNumber = () => {
-        if (state !== 5) {
+    const addNumber = (value: number) => {
+        if (state !== value) {
             state += 1
             setState(state)
         }

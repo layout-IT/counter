@@ -178,6 +178,15 @@ button:last-child {
 
 }
 
+.arrow:hover .bottom_arrow{
+    opacity: 1;
+}
+
+
+.arrow:hover .top_arrow{
+    opacity: 1;
+}
+
 
 .arrow{
     display: flex;
@@ -196,6 +205,8 @@ button:last-child {
     height: 10px;
     margin-bottom: 5px;
     cursor: pointer;
+    opacity: 0;
+    transition: 0.3s linear;
     background: url("https://www.downloadclipart.net/large/2898-up-arrow-deep-blue-black-design.png") 0 0/cover no-repeat;
 }
 .bottom_arrow{
@@ -204,7 +215,9 @@ button:last-child {
     height: 10px;
     background: url("https://www.downloadclipart.net/large/2898-up-arrow-deep-blue-black-design.png") 0 0/cover no-repeat;
     transform: rotate(180deg);
+    opacity: 0;
     cursor: pointer;
+    transition: 0.3s linear;
 }
 
 
