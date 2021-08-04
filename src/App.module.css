@@ -30,7 +30,7 @@ body {
     height: 65%;
     margin-bottom: 15px;
     color: #43a7b4;
-    font-size: 50px;
+    font-size: 30px;
     font-weight: 700;
     display: flex;
     align-items: center;
@@ -60,6 +60,13 @@ body {
     padding: 0px 10px;
     border: none;
     cursor: pointer;
+    box-shadow: 3px 3px 3px 2px #8fd7ef;
+}
+.inc:active{
+    box-shadow: 2px 2px 2px 2px #9fddf3;
+    transition: 0.1s linear;
+
+
 }
 .reset {
     font-size: 30px;
@@ -69,6 +76,14 @@ body {
     padding: 0px 10px;
     border: none;
     cursor: pointer;
+    box-shadow: 3px 3px 3px 2px #8fd7ef;
+
+
+}
+
+.reset:active{
+    box-shadow: 2px 2px 2px 2px #9fddf3;
+    transition: 0.1s linear;
 
 
 }
@@ -161,6 +176,26 @@ button:last-child {
     border: none;
     cursor: pointer;
     width: 100px;
+    box-shadow: 3px 3px 3px 2px #8fd7ef;
+
+}
+
+.unSet{
+    font-size: 30px;
+    font-family: "Arial Black";
+    background-color: #43a7b4;
+    border-radius: 10px;
+    padding: 0px 10px;
+    border: none;
+    width: 100px;
+    opacity: 0.5;
+}
+
+
+.set:active{
+    box-shadow: 2px 2px 2px 2px #9fddf3;
+    transition: 0.1s linear;
+
 
 }
 
@@ -169,13 +204,29 @@ button:last-child {
     display: flex;
 }
 
-.arrow{
-    background-color: white;
+
+
+.arrowRed{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 5px;
+    border-radius: 10px;
+    position: relative;
+    border: 2px solid red;
+    background-color: pink;
     width: 100px;
     text-align: end;
     margin-left: 40px;
+    color: red;
 
+}
 
+.arrowRed:hover .bottom_arrow{
+    opacity: 1;
+}
+.arrowRed:hover .top_arrow{
+    opacity: 1;
 }
 
 .arrow:hover .bottom_arrow{
@@ -196,8 +247,14 @@ button:last-child {
     border-radius: 10px;
     position: relative;
     border: 2px solid #96dee8;
+    background-color: white;
+    width: 100px;
+    text-align: end;
+    margin-left: 40px;
 
 }
+
+
 
 .top_arrow{
     display: block;
@@ -226,3 +283,9 @@ button:last-child {
     left: 50px;
     top: 2px;
 }
+.position_B{
+    position: absolute;
+    left: 50px;
+    top: 2px;
+}
+

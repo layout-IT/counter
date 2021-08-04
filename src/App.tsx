@@ -3,19 +3,26 @@ import './App.module.css';
 import {Counter} from "./Counter";
 
 function App() {
-    let [state, setState] = useState(0)
+    let [state, setState] = useState<number>(0)
 
 
     const addNumber = (value: number) => {
         if (state !== value) {
-            state += 1
-            setState(state)
+            setState(state + 1)
         }
     }
-const reset = ()=> {
-        if (state > 0){
-            setState(0)
+    const reset = (startValue: number) => {
+        if (state > 0) {
+            setState(startValue)
         }
+    }
+
+    const addStartValueToInc = (startValue: number) => {
+        if (startValue >= 0) {
+            state = startValue
+            setState(state)
+        }
+
     }
 
     return (
@@ -26,6 +33,7 @@ const reset = ()=> {
                 reset={reset}
                 title={0}
                 addNumber={addNumber}
+                addStartValueToInc={addStartValueToInc}
 
             />
         </div>
