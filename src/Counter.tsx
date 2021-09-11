@@ -76,7 +76,10 @@ export const Counter = (props: CounterType) => {
 
 
     const setButton = () => {
-        dispatch(setButtonAC())
+        if (startValue >=0){
+            dispatch(setButtonAC())
+        }
+
          // setText(false)
          // props.addStartValueToInc(startValue)
 
