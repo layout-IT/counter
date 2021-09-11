@@ -1,39 +1,52 @@
-import React, {useState} from 'react';
+import React   from 'react';
 import './App.module.css';
 import {Counter} from "./Counter";
+import {useDispatch, useSelector} from "react-redux";
+import {addNumberAc, resetAc,} from "./bll/reduser";
+import {appStateType} from "./bll/store";
 
 function App() {
-    let [state, setState] = useState<number>(0)
+
+    let value = useSelector<appStateType, number >(state => state.counterReduser.value)
+    const text = useSelector<appStateType, boolean>(state => state.counterReduser.text)
+    let maxValue = useSelector<appStateType, number >(state => state.counterReduser.maxValue)
+    let dispatch = useDispatch()
 
 
-    const addNumber = (value: number) => {
-        if (state !== value) {
-            setState(state + 1)
+     const addNumber = () => {
+        if (text &&  maxValue >value){
+            dispatch(addNumberAc())
         }
+
     }
+
+
     const reset = (startValue: number) => {
-        if (state > 0) {
-            setState(startValue)
+        if (text){
+            dispatch(resetAc(startValue))
         }
+
     }
 
     const addStartValueToInc = (startValue: number) => {
-        if (startValue >= 0) {
-            state = startValue
-            setState(state)
-        }
+        dispatch(addStartValueToInc(startValue))
+        // if (startValue >= 0) {
+        //     value = startValue
+        //     setState(value)
+        // }
 
-    }
+}
 
     return (
         <div className="App">
-
             <Counter
-                state={state}
-                reset={reset}
-                title={0}
-                addNumber={addNumber}
-                addStartValueToInc={addStartValueToInc}
+                state ={value}
+                 reset={reset}
+                text={text}
+                 addNumber={addNumber}
+                 addStartValueToInc={addStartValueToInc}
+                maxValue={maxValue}
+
 
             />
         </div>

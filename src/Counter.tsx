@@ -1,75 +1,86 @@
 import s from './App.module.css'
 import {useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {maxValueDownAC, maxValueUpAC, setButtonAC, startValueDownAC, startValueUpAC} from "./bll/reduser";
+import {appStateType} from "./bll/store";
 
-//test
 
 export type CounterType = {
-    title: number
-    addNumber: (value: number) => void
+text: boolean
     state: number
+    addNumber: () => void
     reset: (startValue: number) => void
     addStartValueToInc: (startValue: number) => void
+    maxValue: number
 }
+
 export const Counter = (props: CounterType) => {
-    let [maxValue, setmaxValue] = useState(0)
-    let [startValue, setstartValue] = useState(0)
-    let [text, setText] = useState(false)
+    const dispatch = useDispatch()
+    const maxValue = props.maxValue
+    const startValue = useSelector<appStateType, number>(state => state.counterReduser.startValue)
+    const text = props.text
 
-    useEffect(() => {
-        let valueAsString = localStorage.getItem('startValue')
-        if (valueAsString) {
-            let newValue = JSON.parse(valueAsString)
-            setstartValue(newValue)
-        }
-    }, [])
-    useEffect(() => {
-        let valueAsString = localStorage.getItem('maxValue')
-        if (valueAsString) {
-            let newValue = JSON.parse(valueAsString)
-            setmaxValue(newValue)
-        }
-    }, [])
+    // let [maxValue, setmaxValue] = useState(0)
+    // let [startValue, setstartValue] = useState(0)
+    // let [text, setText] = useState(false)
 
-
-    const locStorValue = () => {
-        localStorage.setItem('maxValue', maxValue.toString())
-        localStorage.setItem('startValue', startValue.toString())
-    }
+    // useEffect(() => {
+    //     let valueAsString = localStorage.getItem('startValue')
+    //     if (valueAsString) {
+    //         let newValue = JSON.parse(valueAsString)
+    //         setstartValue(newValue)
+    //     }
+    // }, [])
+    // useEffect(() => {
+    //     let valueAsString = localStorage.getItem('maxValue')
+    //     if (valueAsString) {
+    //         let newValue = JSON.parse(valueAsString)
+    //         setmaxValue(newValue)
+    //     }
+    // }, [])
+    //
+    //
+    // const locStorValue = () => {
+    //     localStorage.setItem('maxValue', maxValue.toString())
+    //     localStorage.setItem('startValue', startValue.toString())
+    // }
 
 
     const maxValueUp = () => {
-        if (maxValue + 1 > startValue) {
-            setmaxValue(maxValue + 1)
-            setText(true)
-        }
-
+        dispatch(maxValueUpAC())
     }
     const maxValueDown = () => {
-        if (maxValue - 1 > startValue) {
-            setmaxValue(maxValue - 1)
-            setText(true)
-        }
+        dispatch(maxValueDownAC())
+        // if (maxValue - 1 > startValue) {
+        //     setmaxValue(maxValue - 1)
+        //     setText(true)
+        // }
     }
 
     const startValueUp = () => {
-        if (maxValue > (startValue + 1)) {
-            setstartValue(startValue + 1)
-            setText(true)
-        }
+        dispatch(startValueUpAC())
+        // if (maxValue > (startValue + 1)) {
+        //     setstartValue(startValue + 1)
+        //     setText(true)
+        // }
 
     }
     const startValueDown = () => {
-        if (maxValue > (startValue - 1)) {
-            setstartValue(startValue - 1)
-            setText(true)
-        }
+        dispatch(startValueDownAC())
+
+        // if (maxValue > (startValue - 1)) {
+        //     setstartValue(startValue - 1)
+        //     setText(true)
+        // }
     }
 
 
     const setButton = () => {
-        setText(false)
-        props.addStartValueToInc(startValue)
-        locStorValue()
+        dispatch(setButtonAC())
+         // setText(false)
+         // props.addStartValueToInc(startValue)
+
+        // locStorValue()
     }
 
     return <div className={s.wrapper}>
@@ -103,14 +114,13 @@ export const Counter = (props: CounterType) => {
         <div className={s.right}>
             <div
 
-                 className={props.state === maxValue && maxValue !== 0 ? s.red : s.title}>{text && startValue < 0 ? 'negative value ' : text ? "click on the 'set'" : props.state}</div>
+                className={props.state === maxValue && maxValue !== 0 && text ? s.red : s.title}>{!text && startValue < 0 ? 'negative value ' : !text ? "click on the 'set'" : props.state}</div>
             <div className={s.obert}>
                 <div className={s.items}>
-                    <button className={props.state > -1 && !text ? s.inc : s.op} onClick={() => {
-                        props.addNumber(maxValue)
+                    <button className={props.state > -1 && text ? s.inc : s.op} onClick={() => {props.addNumber()
                     }}>inc
                     </button>
-                    <button className={props.state !== startValue && startValue > -1 ? s.reset : s.opasity}
+                    <button className={props.state !== startValue && startValue > -1 && text ? s.reset : s.opasity}
                             onClick={() => {
                                 props.reset(startValue)
                             }}>reset
