@@ -39,6 +39,7 @@ function App() {
     }
 
     useEffect(() => {
+        
         let startValue = localStorage.getItem('startValue')
         if (startValue) {
             let parseMinValue = JSON.parse(startValue)
