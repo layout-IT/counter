@@ -29,7 +29,6 @@ function App() {
         }
 
     }
-
     // const addStartValueToInc = (startValue: number) => {
     //     dispatch(addStartValueToInc(startValue))
     // }
@@ -39,7 +38,6 @@ function App() {
     }
 
     useEffect(() => {
-        
         let startValue = localStorage.getItem('startValue')
         if (startValue) {
             let parseMinValue = JSON.parse(startValue)
